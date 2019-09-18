@@ -67,13 +67,13 @@ module Danger
       errors.each do |issue|
         file = inline_mode && !issue.file_name.nil? && issue.file_name ? issue.file_name : nil
         line = inline_mode && !issue.line.nil? && issue.line > 0 ? issue.line : nil
-
+        msg = issue.message.split('/')[-1] + ":" + line.to_s
         if issue.severity == "error"
-          fail(issue.message, file: file, line: line)
+          fail(msg)
         elsif issue.severity == "warning"
-          warn(issue.message, file: file, line: line)
+          warn(msg)
         else
-          message(issue.message, file: file, line: line)
+          message(msg)
         end
       end
     end
