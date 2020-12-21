@@ -19,10 +19,10 @@ module Danger
             CheckstyleError.new("YYY.java", 2, nil, "warning", "test message2.", "source")
           ]
           @checkstyle_format.send(:send_comment, errors, true)
-          expect(@checkstyle_format.status_report[:errors]).to eq(["test message1."])
-          expect(@checkstyle_format.status_report[:warnings]).to eq(["test message2."])
-          expect(@checkstyle_format.violation_report[:errors][0]).to eq(Violation.new("test message1.", false, "XXX.java", 1))
-          expect(@checkstyle_format.violation_report[:warnings][0]).to eq(Violation.new("test message2.", false, "YYY.java", 2))
+          expect(@checkstyle_format.status_report[:errors]).to eq(["test message1.:1"])
+          expect(@checkstyle_format.status_report[:warnings]).to eq(["test message2.:2"])
+          expect(@checkstyle_format.violation_report[:errors][0]).to eq(Violation.new("test message1.:1", false, "XXX.java", 1))
+          expect(@checkstyle_format.violation_report[:warnings][0]).to eq(Violation.new("test message2.:2", false, "YYY.java", 2))
         end
       end
 
